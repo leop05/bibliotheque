@@ -1,3 +1,6 @@
 body {
-    background-color: skyblue;
+    background-color: #f0f8ff; 
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
 }
