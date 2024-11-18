@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Emprunt{% endblock %}
+
+{% block body %}
+    <h1>Emprunt</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ emprunt.id }}</td>
+            </tr>
+            <tr>
+                <th>Livre</th>
+                <td>{{ emprunt.livre }}</td>
+            </tr>
+            <tr>
+                <th>Utilisateur</th>
+                <td>{{ emprunt.Utilisateur }}</td>
+            </tr>
+            <tr>
+                <th>Dateemprunt</th>
+                <td>{{ emprunt.dateemprunt ? emprunt.dateemprunt|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>DateRetour</th>
+                <td>{{ emprunt.dateRetour ? emprunt.dateRetour|date('Y-m-d') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_emprunt_index') }}">back to list</a>
+
+    <a href="{{ path('app_emprunt_edit', {'id': emprunt.id}) }}">edit</a>
+
+    {{ include('emprunt/_delete_form.html.twig') }}
+{% endblock %}
+
+<h1>Détails du Livre</h1>
+
+<p>
+    <strong>Titre :</strong> {{ livre.titre }} <br>
+    <strong>Auteur :</strong> {{ livre.auteur.nom }}
+</p>
+
+<form method="post" action="{{ path('emprunter_livre') }}">
+    <input type="hidden" name="livre_id" value="{{ livre.id }}">
+    <input type="hidden" name="utilisateur_id" value="{{ app.user.id }}">
+    <button type="submit" class="btn btn-primary">Emprunter ce livre</button>
+</form>

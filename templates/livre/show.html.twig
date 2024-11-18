@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Livre{% endblock %}
+
+{% block body %}
+    <h1>Livre</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ livre.id }}</td>
+            </tr>
+            <tr>
+                <th>Titre</th>
+                <td>{{ livre.titre }}</td>
+            </tr>
+            <tr>
+                <th>Isbn</th>
+                <td>{{ livre.isbn }}</td>
+            </tr>
+            <tr>
+                <th>Date_paruption</th>
+                <td>{{ livre.dateParuption ? livre.dateParuption|date('Y-m-d') : '' }}</td>
+            </tr>
+
+            <tr>
+                <th>Auteur(s)</th>
+                    {% for auteur in livre.auteur %}
+                        <td> {{auteur.nom}} {{ auteur.prenom }}</td>
+                    {% endfor %}
+            </tr>
+            <tr>
+                <th>Genre<th>
+                <td> {{ livre.genre.libelle}} </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_livre_index') }}">back to list</a>
+
+    <a href="{{ path('app_livre_edit', {'id': livre.id}) }}">edit</a>
+
+    {{ include('livre/_delete_form.html.twig') }}
+{% endblock %}
